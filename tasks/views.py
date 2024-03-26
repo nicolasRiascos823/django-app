@@ -107,7 +107,7 @@ def task_detail(request,task_id):
 @login_required()
 def complete_task(request,task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
-    if request.method == 'POST':
+    if request.method == 'GET':
         task.datecompleted = timezone.now()
         task.save()
         return redirect('tasks')
@@ -115,6 +115,6 @@ def complete_task(request,task_id):
 @login_required()
 def delete_task(request,task_id):
     task = get_object_or_404(Task, pk=task_id, user=request.user)
-    if request.method == 'POST':
+    if request.method == 'GET':
         task.delete()
         return redirect('tasks')
