@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <main class="container mt-5">
+        <div class="=row">
+            <div class="col-md-4 offset-md-4">
+
+                <form method="post" class="card card-body">
+                    <h1>{{task.title}}</h1>
+                    {{error}}
+                    {% csrf_token %}
+
+                    {{form.as_p}}
+
+                    <div class="d-flex justify-content-between">
+                        <div class="justify-content-start">
+                            <button class="btn btn-primary">
+                                Update
+                            </button>
+                        </div>
+                        <div class="justify-content-end">
+                            <a href="{% url 'complete_task' task.id %}" class="btn btn-success">
+                                Complete
+                            </a>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container mt-5">
+<h1 class="display-4">Tasks</h1>
+
+<table class="table table-hover table-stripped mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+{% for task in tasks %}
+
+    <tr>
+        <td>{{task.id}}</td>
+        <td>{{task.title}}</td>
+        <td>
+            {% if task.datecompleted == null %}
+                Pending
+            {% else %}
+               Done: {{task.datecompleted}}
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'task_detail' task.id %}" class="btn btn-primary">More info</a>
+            <a href="{% url 'delete_task' task.id %}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+
+
+
+{% endfor %}
+    </tbody>
+</table>
+    </main>
+{% endblock %}
+
+ <li>
+        <a href="{% url 'task_detail' task.id %}">
+            {% if task.important %}
+                <strong>{{task.title}}</strong>
+            {% else %}
+                <p>{{task.title}}</p>
+            {% endif %}
+        </a>
+        <p>{{task.description}}</p>
+        <p>{{task.user.username}}</p>
+        <p>{{task.created_at}}</p>
+    </li>
